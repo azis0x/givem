@@ -424,46 +424,9 @@ function GiveKudosForm({
   );
 }
 
-function SignOutForm() {
-  const isSubmitting = useNavigation().state !== "idle";
-  return (
-    <Form method="POST" action="/logout">
-      <button
-        disabled={isSubmitting}
-        className="px-3 md:px-4 py-2 text-sm font-black text-white bg-gradient-to-r from-violet-500 to-pink-500 rounded-2xl hover:opacity-90 active:scale-95 transition-all shadow-md shadow-violet-200"
-      >
-        {isSubmitting ? (
-          <>
-            <svg
-              className="animate-spin w-4 h-4"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-                className="opacity-25"
-              />
-              <path
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8v8z"
-                className="opacity-75"
-              />
-            </svg>
-          </>
-        ) : (
-          "Sign out"
-        )}
-      </button>
-    </Form>
-  );
-}
-
 export default function Home({ loaderData, actionData }: Route.ComponentProps) {
   const { users, userId, latest, notifications } = loaderData;
+  const isSubmitting = useNavigation().state !== "idle";
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-pink-50 to-amber-50">
@@ -491,7 +454,38 @@ export default function Home({ loaderData, actionData }: Route.ComponentProps) {
               Inbox
             </a>
           </nav>
-          <SignOutForm />
+          <Form method="POST" action="/logout">
+            <button
+              disabled={isSubmitting}
+              className="px-3 md:px-4 py-2 text-sm font-black text-white bg-gradient-to-r from-violet-500 to-pink-500 rounded-2xl hover:opacity-90 active:scale-95 transition-all shadow-md shadow-violet-200"
+            >
+              {isSubmitting ? (
+                <>
+                  <svg
+                    className="animate-spin w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      className="opacity-25"
+                    />
+                    <path
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v8z"
+                      className="opacity-75"
+                    />
+                  </svg>
+                </>
+              ) : (
+                "Sign out"
+              )}
+            </button>
+          </Form>
         </div>
       </header>
 
