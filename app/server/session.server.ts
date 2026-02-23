@@ -12,7 +12,7 @@ export const sessionStorage = createCookieSessionStorage({
     name: "__givem_sid",
     secrets: [process.env.SESSION_SECRET],
     httpOnly: true,
-    sameSite: process.env.NODE_ENV !== "production" ? "lax" : "none",
+    sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
     path: "/",
     domain: process.env.BASE_URL,
